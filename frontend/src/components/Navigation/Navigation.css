@@ -1,0 +1,37 @@
+#nav-bar {
+  position: sticky;
+  top: 0px;
+  padding: 5px;
+  background: #FFFFFF;
+}
+
+#nav-bar > ul,
+.profile-dropdown {
+  display: flex;
+  list-style: none;
+}
+
+#nav-bar .spacer {
+  flex: 1 0 auto;
+}
+.profile-button {
+  cursor: pointer;
+}
+
+.profile-dropdown {
+  position: absolute;
+  right: 0;
+  flex-direction: column;
+  padding: 0px;
+  background: #FFFFFF;
+  box-shadow: 0 5px 10px 5px rgba(50, 50, 50, 0.25);
+}
+
+.profile-dropdown li {
+  display: block;
+  padding: 10px;
+}
+
+.profile-dropdown li:hover {
+  background: #CCCCCC;
+}

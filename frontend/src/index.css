@@ -1,1 +1,12 @@
 /* TODO Add site wide styles */
+html {
+  background: #EEEEEE;
+  margin: 0;
+}
+
+body {
+  position: relative;
+  top: 0;
+  height: 100%;
+  margin: 0;
+}
