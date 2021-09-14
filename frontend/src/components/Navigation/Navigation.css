@@ -3,6 +3,7 @@
   top: 0px;
   padding: 5px;
   background: #FFFFFF;
+  box-shadow: 0 0px 5px 0px rgba(50, 50, 50, 0.25);
 }
 
 #nav-bar > ul,
