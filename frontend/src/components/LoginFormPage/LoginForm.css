@@ -1,0 +1,22 @@
+html {
+  background: #EEEEEE;
+}
+
+#login-box,
+#login-box form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#login-box form {
+  max-width: 500px;
+  padding: 20px;
+  border: 1px solid #CCCCCC;
+  border-radius: 10px;
+  background: #FFFFFF;
+}
+
+#login-box form input {
+  margin-bottom: 15px;
+}
