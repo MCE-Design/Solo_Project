@@ -5,6 +5,8 @@ import * as sessionActions from "../../store/session";
 
 import './SignupForm.css'
 
+// TODO: Refactor as a modal
+
 const SignupFormPage = () => {
   const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.user);
