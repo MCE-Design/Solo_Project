@@ -30,6 +30,6 @@ module.exports = {
 
   down: async (queryInterface, Sequelize) => {
     const Op = Sequelize.Op;
-    return queryInterface.bulkDelete('Spots', null, { truncate: true, cascade: true });
+    return queryInterface.bulkDelete('Spots', null, { truncate: true, cascade: true, restartIdentity: true });
   }
 };
