@@ -21,41 +21,43 @@ const SpotsPage = () => {
 
   return (
     <>
-      <div>
-        <h1>
-          Adventurous Stays
-        </h1>
-      </div>
-      <div id="spots-container">
-        {spots.map((spot) => {
-            return (
-              <div key={spot.id} className="spot">
-                <SpotImage spotId={spot.id}/>
-                <div className="spot-text">
-                  <div id="spot-name">
-                    {spot.name}
-                  </div>
-                  <div id="spot-address-block">
-                    <div>
-                      {spot.address}
+      <div className="container">
+        <div className="page-title">
+          <h1>
+            Adventurous Stays
+          </h1>
+        </div>
+        <div id="spots-container">
+          {spots.map((spot) => {
+              return (
+                <div key={spot.id} className="spot">
+                  <SpotImage spotId={spot.id}/>
+                  <div className="spot-text">
+                    <div className="spot-name">
+                      {spot.name}
                     </div>
-                    <div>
-                      {spot.city}
+                    <div className="spot-address-block">
+                      <div>
+                        {spot.address}
+                      </div>
+                      <div className="spot-city">
+                        {spot.city}
+                      </div>
+                      <div className="spot-state">
+                        {spot.state}
+                      </div>
+                      <div className="spot-country">
+                        {spot.country}
+                      </div>
                     </div>
-                    <div>
-                      {spot.state}
+                    <div className="spot-price">
+                      {spot.price}
                     </div>
-                    <div>
-                      {spot.country}
-                    </div>
-                  </div>
-                  <div>
-                    {spot.price}
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+        </div>
       </div>
     </>
   );

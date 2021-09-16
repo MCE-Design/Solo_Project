@@ -4,6 +4,7 @@
 
 .spot {
   display: flex;
+  margin-bottom: 25px;
 }
 .spot-image {
   margin-right: 20px;
@@ -18,5 +19,14 @@
 }
 
 .spot-name {
-  font-size: 2rem;
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+}
+
+.spot-country {
+  margin-bottom: 15px;
+}
+
+.spot-price {
+
 }
