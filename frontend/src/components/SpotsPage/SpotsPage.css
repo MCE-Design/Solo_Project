@@ -1,0 +1,22 @@
+#spots-container {
+  margin-top: 30px;
+}
+
+.spot {
+  display: flex;
+}
+.spot-image {
+  margin-right: 20px;
+}
+.spot img {
+  max-width: 300px;
+  border-radius: 10px;
+}
+
+.spot-text {
+
+}
+
+.spot-name {
+  font-size: 2rem;
+}

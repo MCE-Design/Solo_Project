@@ -14,7 +14,7 @@ export const getSpots = () => async dispatch => {
 };
 
 
-const initialState = [];
+const initialState = {};
 
 const spotsReducer = (state = initialState, action) => {
   // let newState;
@@ -27,7 +27,7 @@ const spotsReducer = (state = initialState, action) => {
       return {
         ...allSpots,
         ...state,
-        [action.list]: action.list
+        list: action.list
       };
     }
     default:
