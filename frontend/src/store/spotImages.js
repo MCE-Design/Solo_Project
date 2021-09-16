@@ -26,8 +26,7 @@ const imagesReducer = (state = initialState, action) => {
       });
       return {
         ...allImages,
-        ...state,
-        list: action.list
+        ...state
       };
     }
     default:

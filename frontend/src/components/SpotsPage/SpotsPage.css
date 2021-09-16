@@ -2,13 +2,24 @@
   margin-top: 30px;
 }
 
-.spot {
+.spot,
+.spot > a {
   display: flex;
+  text-decoration: none;
+  color: #666666;
+}
+
+.spot {
+  padding: 25px;
+  border: 1px solid #CCCCCC;
+  border-width: 0 0 1px;
   margin-bottom: 25px;
 }
+
 .spot-image {
   margin-right: 20px;
 }
+
 .spot img {
   max-width: 300px;
   border-radius: 10px;

@@ -4,20 +4,21 @@ import { getImages } from "../../store/spotImages"
 
 const SpotImage = ({spotId}) => {
   const dispatch = useDispatch();
-  const images = useSelector(state => state.images.list);
+  const images = useSelector(state => state.images);
+  const imagesArr = Object.values(images);
+  const imageFilteredArr = imagesArr.filter((image) => image.spotId === +spotId );
 
 
   useEffect(() => {
     dispatch(getImages(spotId));
   },[dispatch, spotId]);
 
-  console.log(images)
   if (!images) {
     return null;
   }
   return (
     <div className="spot-image">
-      {images.map((image) => {
+      {imageFilteredArr.map((image) => {
         return(
           <div key={image.id} className="image-wrapper">
             <img src={image.url} alt="" />
