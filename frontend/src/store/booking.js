@@ -1,11 +1,17 @@
 import { csrfFetch } from './csrf'
-const BOOK_SPOT = 'booking/book_spot'
 
+const BOOK_SPOT = 'booking/bookSpot';
+const BOOK_DELETE = 'booking/bookDelete';
 
 // export const bookSpot = booking => ({
 //   type: BOOK_SPOT,
 //   booking,
 // });
+
+export const bookDelete = (bookingId) => ({
+  type: BOOK_DELETE,
+  id: bookingId,
+})
 
 export const bookSpot = (payload, id) => async (dispatch) => {
   console.log("reducerData", payload)
@@ -33,9 +39,6 @@ const bookingReducer = (state = initialState, action) => {
           ...state,
           [action.booking.id]: action.booking
         };
-        // const pokemonList = newState.list.map(id => newState[id]);
-        // pokemonList.push(action.pokemon);
-        // newState.list = sortList(pokemonList);
         return newState;
       }
       return {
@@ -45,6 +48,10 @@ const bookingReducer = (state = initialState, action) => {
           ...action.booking,
         }
       };
+    }
+    case BOOK_DELETE: {
+      console.log("state", state)
+      return state.filter(( id ) => id !== action.id)
     }
     default:
       return state;

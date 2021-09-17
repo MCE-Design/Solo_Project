@@ -73,6 +73,25 @@ router.post(
   }),
 );
 
+/* DELETE Booking */
+router.delete(
+  '/:id/booking/:id',
+  // validateBookingDelete,
+  asyncHandler(async (req, res) => {
+    const bookingId = req.params.id
+    console.log("HIT", req.params.id)
+    const destroyedBooking = await Booking.destroy({
+      where: {
+        id: bookingId
+      }
+    });
+    console.log("DESTROYED", bookingId)
+    return res.json({
+      destroyedBooking
+    });
+  })
+)
+
 // router.get('/new', csrfProtection, asyncHandler(async (req, res) => {
 //   if (!res.locals.authenticated) {
 //     return res.redirect('/users/login');

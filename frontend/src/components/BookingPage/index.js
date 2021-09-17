@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, Redirect } from "react-router-dom";
 import { getOneSpot } from "../../store/spots"
 import SpotImage from "../SpotImage";
-import { bookSpot } from "../../store/booking"
+import { bookSpot, bookDelete } from "../../store/booking"
 import { getUser } from "../../store/user"
 
 import { Modal } from '../../context/Modal';
@@ -22,16 +22,16 @@ const BookingPage = () => {
   const [ endDate, setEndDate ] = useState("");
   const [ errors, setErrors ] = useState([]);
 
-  console.log("BookingPageId", id)
   const spots = useSelector(state => state.spots.list);
-  const owner = useSelector(state => state.user)[2].userName;
+  const owner = useSelector(state => state.user);
   let spot = {};
   let ownerId = 0;
+  let ownerName
   if(spots){
     spot = spots[0]; // Hacky destructure, probably a better way
     ownerId = spot.userId;
   }
-  console.log("owner", owner)
+
   useEffect(() => {
     dispatch(getOneSpot(id));
   },[dispatch, id]);
@@ -40,8 +40,9 @@ const BookingPage = () => {
     dispatch(getUser(ownerId));
   },[dispatch, ownerId])
 
-  console.log("spot", spot)
-  console.log("sessionUser", sessionUser)
+  if(owner[2]){
+    ownerName = owner[2].userName;
+  }
   console.log("errors", errors)
 
   const handleSubmit = (e) => {
@@ -80,9 +81,16 @@ const BookingPage = () => {
         });
     }
   };
-
-  console.log("owner", owner)
-  if (!spot) {
+  const deleteBooking = (e) => {
+    e.preventDefault();
+    return dispatch(bookDelete(11))
+    .catch(async (res) => {
+      const data = await res.json();
+      if (data && data.errors) setErrors(data.errors);
+    });
+  }
+  console.log("owner", owner, ownerName)
+  if (!spot || !owner) {
     return null;
   }
   return (
@@ -103,7 +111,8 @@ const BookingPage = () => {
             <SpotImage spotId={id}/>
           </div>
           <div>
-            <h2>Dwelling hosted by user {owner}</h2>
+            <h2>Dwelling hosted by {ownerName}</h2>
+            <button onClick={deleteBooking}>Delete Booking</button>
           </div>
           <div>
             <form onSubmit={handleSubmit}>
@@ -128,7 +137,7 @@ const BookingPage = () => {
                   required
                 />
               </label>
-              <button type="submit">Check Availability</button>
+              <button type="submit">Book Lodging</button>
             </form>
           </div>
         </div>
