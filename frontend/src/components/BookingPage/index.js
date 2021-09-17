@@ -3,19 +3,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, Redirect } from "react-router-dom";
 import { getOneSpot } from "../../store/spots"
 import SpotImage from "../SpotImage";
+import { bookSpot } from "../../store/booking"
 
-import LoginFormModal from "../LoginFormModal/"
+import { Modal } from '../../context/Modal';
+import LoginForm from '../LoginFormModal/LoginForm';
 
 import './BookingPage.css'
 
 const BookingPage = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
+  const spotId = parseInt( id );
 
   const sessionUser = useSelector(state => state.session.user);
-  const [ beginDate, setBeginDate] = useState();
-  const [ stopDate, setStopDate ] = useState();
-  const [errors, setErrors] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [ startDate, setStartDate] = useState("");
+  const [ endDate, setEndDate ] = useState("");
+  const [ errors, setErrors ] = useState([]);
 
   console.log("BookingPageId", id)
   const spots = useSelector(state => state.spots.list);
@@ -30,20 +34,45 @@ const BookingPage = () => {
   },[dispatch, id]);
 
   console.log("spot", spot)
+  console.log("sessionUser", sessionUser)
+  console.log("errors", errors)
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // if (!sessionUser) return (
-    //   LoginFormModal()
-    // );
-    // if (password === confirmPassword) {
-    //   setErrors([]);
-    //   return dispatch(sessionActions.signup({ email, userName, password }))
-    //     .catch(async (res) => {
-    //       const data = await res.json();
-    //       if (data && data.errors) setErrors(data.errors);
-    //     });
-    // }
+
+    const currentTime = Date.now();
+    const date1 = new Date(startDate);
+    const date2 = new Date(endDate);
+    const payload = {
+      spotId,
+      userId: sessionUser.id,
+      startDate,
+      endDate,
+    };
+    console.log("begin", startDate)
+    console.log(startDate <= endDate)
+    console.log("Begin same as Stop?", date1.getTime() === date2.getTime())
+    console.log("Begin more than Stop?", date1.getTime() > date2.getTime())
+    console.log("new date", new Date())
+    if(startDate && date1.getTime() < currentTime ){
+      return setErrors(['Please make sure that the start date is in the future']);
+    }
+    if( date1.getTime() >= date2.getTime() ){
+      return setErrors(['Please make sure that the end date is after the start date.']);
+    }
+    if (!sessionUser){
+      setShowModal(true);
+    }
+    if (date1.getTime() > currentTime && date1.getTime() < date2.getTime()) {
+      console.log("payload", payload);
+      setErrors([]);
+      return dispatch(bookSpot( payload, id ))
+        .catch(async (res) => {
+          const data = await res.json();
+          if (data && data.errors) setErrors(data.errors);
+        });
+    }
+
     // return setErrors(['Confirm Password field must be the same as the Password field']);
   };
 
@@ -52,6 +81,11 @@ const BookingPage = () => {
   }
   return (
     <>
+      {showModal && (
+        <Modal onClose={() => setShowModal(false)}>
+          <LoginForm />
+        </Modal>
+      )}
       <div className="container">
         <div className="page-title">
           <h1>
@@ -75,8 +109,8 @@ const BookingPage = () => {
                 Check-In
                 <input
                   type="date"
-                  value={beginDate}
-                  onChange={(e) => setBeginDate(e.target.value)}
+                  value={startDate}
+                  onChange={(e) => setStartDate(e.target.value)}
                   required
                 />
               </label>
@@ -84,8 +118,8 @@ const BookingPage = () => {
                 Check-Out
                 <input
                   type="date"
-                  value={stopDate}
-                  onChange={(e) => setStopDate(e.target.value)}
+                  value={endDate}
+                  onChange={(e) => setEndDate(e.target.value)}
                   required
                 />
               </label>

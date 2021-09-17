@@ -8,7 +8,7 @@ const { Booking } = require("../../db/models");
 // Add back for validations if I get to create/delete/edit spots
 // const { User } = require('../../db/models');
 const { check } = require('express-validator');
-// const { handleValidationErrors } = require('../../utils/validation');
+const { handleValidationErrors } = require('../../utils/validation');
 
 // Validate Booking Middleware
 // const validateBooking = [
@@ -19,8 +19,6 @@ const { check } = require('express-validator');
 //     .exists({ checkFalsy: true })
 //     .isLength({ min: 4 })
 //     .withMessage('Please provide a username with at least 4 characters.'),
-//   check('userName')
-//     .withMessage('Username cannot be an email.'),
 //   handleValidationErrors,
 // ];
 
@@ -63,16 +61,14 @@ router.get('/:id/images', asyncHandler(async (req, res) => {
 
 /* BOOK Spot */
 router.post(
-  '/:id',
+  '/:id/booking',
   // validateBooking,
   asyncHandler(async (req, res) => {
-    const { startDate, endDate, userName } = req.body;
-    const user = await User.signup({ email, userName, password });
-
-    await setTokenCookie(res, user);
+    const { spotId, userId, startDate, endDate } = req.body;
+    const booking = await Booking.bookSpot({ spotId, userId, startDate, endDate });
 
     return res.json({
-      user,
+      booking,
     });
   }),
 );
