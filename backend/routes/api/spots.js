@@ -65,7 +65,7 @@ router.post(
   // validateBooking,
   asyncHandler(async (req, res) => {
     const { spotId, userId, startDate, endDate } = req.body;
-    const booking = await Booking.bookSpot({ spotId, userId, startDate, endDate });
+    const booking = await Booking.create({ spotId, userId, startDate, endDate });
 
     return res.json({
       booking,
