@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, Redirect } from "react-router-dom";
 import { getOneSpot } from "../../store/spots"
 import SpotImage from "../SpotImage";
-import { bookSpot, bookDelete } from "../../store/booking"
+import { bookSpot, deleteBooking } from "../../store/booking"
 import { getUser } from "../../store/user"
 
 import { Modal } from '../../context/Modal';
@@ -27,6 +27,7 @@ const BookingPage = () => {
   let spot = {};
   let ownerId = 0;
   let ownerName
+
   if(spots){
     spot = spots[0]; // Hacky destructure, probably a better way
     ownerId = spot.userId;
@@ -81,14 +82,14 @@ const BookingPage = () => {
         });
     }
   };
-  const deleteBooking = (e) => {
+  const bookingDelete = (e) => {
     e.preventDefault();
-    return dispatch(bookDelete(11))
-    .catch(async (res) => {
-      const data = await res.json();
-      if (data && data.errors) setErrors(data.errors);
+    return dispatch(deleteBooking(11))
+      .catch(async (res) => {
+        const data = await res.json();
+        if (data && data.errors) setErrors(data.errors);
     });
-  }
+  };
   console.log("owner", owner, ownerName)
   if (!spot || !owner) {
     return null;
@@ -112,7 +113,7 @@ const BookingPage = () => {
           </div>
           <div>
             <h2>Dwelling hosted by {ownerName}</h2>
-            <button onClick={deleteBooking}>Delete Booking</button>
+            <button onClick={bookingDelete}>Delete Booking</button>
           </div>
           <div>
             <form onSubmit={handleSubmit}>

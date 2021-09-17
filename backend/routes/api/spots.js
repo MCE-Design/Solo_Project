@@ -75,11 +75,14 @@ router.post(
 
 /* DELETE Booking */
 router.delete(
-  '/:id/booking/:id',
+  '/booking/:id',
   // validateBookingDelete,
   asyncHandler(async (req, res) => {
     const bookingId = req.params.id
     console.log("HIT", req.params.id)
+    console.log("BookingId", bookingId)
+    const foundBooking = Booking.findByPk(bookingId);
+    if (!foundBooking) throw new Error('Cannot find booking');
     const destroyedBooking = await Booking.destroy({
       where: {
         id: bookingId

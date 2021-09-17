@@ -1,17 +1,37 @@
 import { csrfFetch } from './csrf'
 
-const BOOK_SPOT = 'booking/bookSpot';
-const BOOK_DELETE = 'booking/bookDelete';
+const LOAD_BOOKING = 'booking/load_booking';
+const ADD_BOOKING = 'booking/add_booking';
+const BOOK_DELETE = 'booking/book_delete';
 
-// export const bookSpot = booking => ({
-//   type: BOOK_SPOT,
-//   booking,
-// });
+// Action Creators
 
-export const bookDelete = (bookingId) => ({
-  type: BOOK_DELETE,
-  id: bookingId,
+const load = list => ({
+  type: LOAD_BOOKING,
+  list,
+});
+
+const add = (booking) => ({
+  type: ADD_BOOKING,
+  booking,
 })
+
+const bookDelete = (bookingId) => ({
+  type: BOOK_DELETE,
+  bookingId: bookingId,
+})
+
+// Thunks
+
+export const deleteBooking = (id) => async (dispatch) => {
+  const response = await csrfFetch(`/api/spots/booking/${id}`, {
+    method: 'DELETE',
+    body: JSON.stringify(id),
+  });
+  if (response.ok) {
+    dispatch(bookDelete(id));
+  }
+}
 
 export const bookSpot = (payload, id) => async (dispatch) => {
   console.log("reducerData", payload)
@@ -22,18 +42,26 @@ export const bookSpot = (payload, id) => async (dispatch) => {
   });
   if (response.ok) {
     const newBooking = await response.json();
-    // dispatch(addOnePokemon(newPokemon));
-    return response;
+    dispatch(add(payload))
+    return newBooking;
   }
 }
 
+export const getOneBooking = (id) => async (dispatch) => {
+  const response = await fetch(`/api/spots/${id}/booking/`);
+
+  if (response.ok) {
+    const booking = await response.json();
+    dispatch(load(booking, id));
+  }
+};
 
 const initialState = {};
 
 const bookingReducer = (state = initialState, action) => {
   // let newState;
   switch (action.type) {
-    case BOOK_SPOT: {
+    case ADD_BOOKING: {
       if(!state[action.booking.id]){
         const newState = {
           ...state,
@@ -50,8 +78,9 @@ const bookingReducer = (state = initialState, action) => {
       };
     }
     case BOOK_DELETE: {
-      console.log("state", state)
-      return state.filter(( id ) => id !== action.id)
+      const newState = { ...state };
+      delete newState[action.bookingId];
+      return newState;
     }
     default:
       return state;
