@@ -4,6 +4,7 @@ import { useParams, Redirect } from "react-router-dom";
 import { getOneSpot } from "../../store/spots"
 import SpotImage from "../SpotImage";
 import { bookSpot } from "../../store/booking"
+import { getUser } from "../../store/user"
 
 import { Modal } from '../../context/Modal';
 import LoginForm from '../LoginFormModal/LoginForm';
@@ -23,15 +24,21 @@ const BookingPage = () => {
 
   console.log("BookingPageId", id)
   const spots = useSelector(state => state.spots.list);
-  let spot = {}
-
+  const owner = useSelector(state => state.user)[2].userName;
+  let spot = {};
+  let ownerId = 0;
   if(spots){
     spot = spots[0]; // Hacky destructure, probably a better way
+    ownerId = spot.userId;
   }
-
+  console.log("owner", owner)
   useEffect(() => {
     dispatch(getOneSpot(id));
   },[dispatch, id]);
+
+  useEffect(() => {
+    dispatch(getUser(ownerId));
+  },[dispatch, ownerId])
 
   console.log("spot", spot)
   console.log("sessionUser", sessionUser)
@@ -72,10 +79,9 @@ const BookingPage = () => {
           if (data && data.errors) setErrors(data.errors);
         });
     }
-
-    // return setErrors(['Confirm Password field must be the same as the Password field']);
   };
 
+  console.log("owner", owner)
   if (!spot) {
     return null;
   }
@@ -93,12 +99,11 @@ const BookingPage = () => {
           </h1>
         </div>
         <div id="booking-container">
-          Yep, this is the booking page for Id {id}!
           <div id="booking-images">
             <SpotImage spotId={id}/>
           </div>
           <div>
-            <h2>Dwelling hosted by user {spot.userId}</h2>
+            <h2>Dwelling hosted by user {owner}</h2>
           </div>
           <div>
             <form onSubmit={handleSubmit}>

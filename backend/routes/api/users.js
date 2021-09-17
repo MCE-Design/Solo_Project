@@ -46,4 +46,16 @@ router.post(
   }),
 );
 
+router.get('/:id', asyncHandler(async (req, res) => {
+  const id = req.params.id
+  const user = await User.findAll({
+    where: {
+      id
+    }
+  });
+
+  return res.json(user)
+}));
+
+
 module.exports = router;
