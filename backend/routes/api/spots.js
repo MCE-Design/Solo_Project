@@ -11,16 +11,15 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
 // Validate Booking Middleware
-// const validateBooking = [
-//   check('startDate')
-//     .exists({ checkFalsy: true })
-//     .withMessage('Please provide a valid email.'),
-//   check('endDate')
-//     .exists({ checkFalsy: true })
-//     .isLength({ min: 4 })
-//     .withMessage('Please provide a username with at least 4 characters.'),
-//   handleValidationErrors,
-// ];
+const validateBooking = [
+  check('startDate')
+    .exists({ checkFalsy: true })
+    .withMessage('Please select a check in date.'),
+  check('endDate')
+    .exists({ checkFalsy: true })
+    .withMessage('Please select a check out date.'),
+  handleValidationErrors,
+];
 
 
 /* GET Spots */
@@ -72,6 +71,8 @@ router.post(
     });
   }),
 );
+
+/* CHECK Booking */
 
 /* DELETE Booking */
 router.delete(

@@ -42,7 +42,8 @@ export const bookSpot = (payload, id) => async (dispatch) => {
   });
   if (response.ok) {
     const newBooking = await response.json();
-    dispatch(add(payload))
+    dispatch(add(payload));
+
     return newBooking;
   }
 }

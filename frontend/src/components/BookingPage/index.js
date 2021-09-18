@@ -41,6 +41,7 @@ const BookingPage = () => {
     dispatch(getUser(ownerId));
   },[dispatch, ownerId])
 
+
   if(owner[2]){
     ownerName = owner[2].userName;
   }
@@ -91,7 +92,7 @@ const BookingPage = () => {
     });
   };
   console.log("owner", owner, ownerName)
-  if (!spot || !owner) {
+  if (!spot || !ownerName) {
     return null;
   }
   return (
@@ -111,15 +112,12 @@ const BookingPage = () => {
           <div id="booking-images">
             <SpotImage spotId={id}/>
           </div>
-          <div>
+          <div id="booking-owner">
             <h2>Dwelling hosted by {ownerName}</h2>
             <button onClick={bookingDelete}>Delete Booking</button>
           </div>
-          <div>
+          <div id="booking-form">
             <form onSubmit={handleSubmit}>
-              <ul>
-                {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-              </ul>
               <label>
                 Check-In
                 <input
@@ -139,6 +137,9 @@ const BookingPage = () => {
                 />
               </label>
               <button type="submit">Book Lodging</button>
+              <ul>
+                {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+              </ul>
             </form>
           </div>
         </div>

@@ -7,6 +7,19 @@
   display: flex;
 }
 
-#booking-images img {
+#booking-images .image-wrapper {
   max-width: 500px;
+  overflow: hidden;
+}
+
+#booking-images img {
+  max-height: 340px;
+}
+
+#booking-owner {
+
+}
+
+#booking-form {
+
 }
