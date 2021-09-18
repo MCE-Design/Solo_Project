@@ -84,7 +84,7 @@ const BookingPage = () => {
   };
   const bookingDelete = (e) => {
     e.preventDefault();
-    return dispatch(deleteBooking(11))
+    return dispatch(deleteBooking(12))
       .catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) setErrors(data.errors);

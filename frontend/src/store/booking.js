@@ -26,7 +26,7 @@ const bookDelete = (bookingId) => ({
 export const deleteBooking = (id) => async (dispatch) => {
   const response = await csrfFetch(`/api/spots/booking/${id}`, {
     method: 'DELETE',
-    body: JSON.stringify(id),
+    // body: JSON.stringify(id),
   });
   if (response.ok) {
     dispatch(bookDelete(id));

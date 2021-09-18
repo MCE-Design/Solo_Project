@@ -81,7 +81,7 @@ router.delete(
     const bookingId = req.params.id
     console.log("HIT", req.params.id)
     console.log("BookingId", bookingId)
-    const foundBooking = Booking.findByPk(bookingId);
+    const foundBooking = await Booking.findByPk(bookingId);
     if (!foundBooking) throw new Error('Cannot find booking');
     const destroyedBooking = await Booking.destroy({
       where: {
@@ -94,19 +94,5 @@ router.delete(
     });
   })
 )
-
-// router.get('/new', csrfProtection, asyncHandler(async (req, res) => {
-//   if (!res.locals.authenticated) {
-//     return res.redirect('/users/login');
-//   }
-//   const userId = res.locals.user.dataValues.id
-//   const post = await Pawst.build();
-//   return res.render('new-pawst', {
-//     title: 'New Pawst',
-//     post,
-//     csrfToken: req.csrfToken(),
-//     userId
-//   });
-// }));
 
 module.exports = router;
