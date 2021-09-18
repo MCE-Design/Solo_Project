@@ -71,7 +71,8 @@ const sessionReducer = (state = initialState, action) => {
       return newState;
     case REMOVE_USER:
       newState = Object.assign({}, state);
-      newState.user = null;
+      // newState.user = null;  // This was the way the tutorial had, but delete forces a rerender
+      delete newState.user;
       return newState;
     default:
       return state;

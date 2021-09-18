@@ -43,10 +43,17 @@ export const bookSpot = (payload, id) => async (dispatch) => {
   if (response.ok) {
     const newBooking = await response.json();
     dispatch(add(payload));
-
     return newBooking;
   }
 }
+
+export const getAllBookingsId = (id) => async dispatch => {
+  const response = await fetch(`/api/spots/${id}/booking/`);
+  if (response.ok) {
+    const list = await response.json();
+    dispatch(load(list, id));
+  }
+};
 
 export const getOneBooking = (id) => async (dispatch) => {
   const response = await fetch(`/api/spots/${id}/booking/`);
@@ -62,6 +69,16 @@ const initialState = {};
 const bookingReducer = (state = initialState, action) => {
   // let newState;
   switch (action.type) {
+    case LOAD_BOOKING: {
+      const allBookings = {};
+      action.list.allBookings.forEach(booking => {
+        allBookings[booking.id] = booking;
+      });
+      return {
+        ...allBookings,
+        ...state
+      };
+    }
     case ADD_BOOKING: {
       if(!state[action.booking.id]){
         const newState = {

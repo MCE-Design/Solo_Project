@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, Redirect } from "react-router-dom";
 import { getOneSpot } from "../../store/spots"
 import SpotImage from "../SpotImage";
-import { bookSpot, deleteBooking } from "../../store/booking"
+import { bookSpot, deleteBooking, getAllBookingsId } from "../../store/booking"
 import { getUser } from "../../store/user"
 
 import { Modal } from '../../context/Modal';
+import Reviews from '../ReviewArea';
 import LoginForm from '../LoginFormModal/LoginForm';
 
 import './BookingPage.css'
@@ -28,50 +29,58 @@ const BookingPage = () => {
   let ownerId = 0;
   let ownerName
 
+  useEffect(() => {
+    dispatch(getOneSpot(id));
+  },[dispatch, id]);
+
   if(spots){
     spot = spots[0]; // Hacky destructure, probably a better way
     ownerId = spot.userId;
   }
 
   useEffect(() => {
-    dispatch(getOneSpot(id));
-  },[dispatch, id]);
-
-  useEffect(() => {
     dispatch(getUser(ownerId));
   },[dispatch, ownerId])
+  console.log("owner", owner, ownerName)
 
-
-  if(owner[2]){
-    ownerName = owner[2].userName;
+  if(owner[ownerId]){
+    ownerName = owner[ownerId].userName;
   }
-  console.log("errors", errors)
+  console.log("owner", owner, ownerName)
 
+  useEffect(() => {
+    dispatch(getAllBookingsId(spotId));
+  },[dispatch, spotId])
+
+  console.log("errors", errors)
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const currentTime = Date.now();
     const date1 = new Date(startDate);
     const date2 = new Date(endDate);
-    const payload = {
-      spotId,
-      userId: sessionUser.id,
-      startDate,
-      endDate,
-    };
+    let payload = {}
+    if (sessionUser === undefined){
+      setShowModal(true);
+    } else {
+      payload = {
+        spotId,
+        userId: sessionUser.id,
+        startDate,
+        endDate,
+      };
+    }
     console.log("begin", startDate)
     console.log(startDate <= endDate)
     console.log("Begin same as Stop?", date1.getTime() === date2.getTime())
     console.log("Begin more than Stop?", date1.getTime() > date2.getTime())
     console.log("new date", new Date())
+
     if(startDate && date1.getTime() < currentTime ){
       return setErrors(['Please make sure that the start date is in the future']);
     }
     if( date1.getTime() >= date2.getTime() ){
       return setErrors(['Please make sure that the end date is after the start date.']);
-    }
-    if (!sessionUser){
-      setShowModal(true);
     }
     if (date1.getTime() > currentTime && date1.getTime() < date2.getTime()) {
       console.log("payload", payload);
@@ -83,6 +92,7 @@ const BookingPage = () => {
         });
     }
   };
+
   const bookingDelete = (e) => {
     e.preventDefault();
     return dispatch(deleteBooking(12))
@@ -91,7 +101,7 @@ const BookingPage = () => {
         if (data && data.errors) setErrors(data.errors);
     });
   };
-  console.log("owner", owner, ownerName)
+
   if (!spot || !ownerName) {
     return null;
   }
@@ -142,6 +152,7 @@ const BookingPage = () => {
               </ul>
             </form>
           </div>
+          <Reviews />
         </div>
       </div>
     </>

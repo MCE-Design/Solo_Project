@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router();
 const asyncHandler = require('express-async-handler');
+const { requireAuth } = require('../../utils/auth');
 const { Spot } = require("../../db/models");
 const { Image } = require("../../db/models");
 const { Booking } = require("../../db/models");
@@ -61,7 +62,8 @@ router.get('/:id/images', asyncHandler(async (req, res) => {
 /* BOOK Spot */
 router.post(
   '/:id/booking',
-  // validateBooking,
+  validateBooking,
+  requireAuth,
   asyncHandler(async (req, res) => {
     const { spotId, userId, startDate, endDate } = req.body;
     console.log(req.body)
@@ -72,7 +74,23 @@ router.post(
   }),
 );
 
-/* CHECK Booking */
+/* CHECK ALL Bookings for a SPOT */
+router.get(
+  '/:id/booking',
+  asyncHandler(async (req, res) => {
+    const spotId = req.params.id
+    const allBookings = await Booking.findAll({
+      where: {
+        spotId
+      }
+    })
+    console.log(allBookings)
+    return res.json({
+      allBookings,
+    })
+  })
+)
+
 
 /* DELETE Booking */
 router.delete(
