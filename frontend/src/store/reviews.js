@@ -1,4 +1,3 @@
-import { response } from '../../../backend/app';
 import { csrfFetch } from './csrf'
 
 const LOAD = "reviews/load_reviews";
