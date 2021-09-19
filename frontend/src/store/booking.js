@@ -4,6 +4,7 @@ const LOAD_BOOKING = 'booking/load_booking';
 const ADD_BOOKING = 'booking/add_booking';
 const BOOK_DELETE = 'booking/book_delete';
 
+
 // Action Creators
 
 const load = list => ({
@@ -20,6 +21,7 @@ const bookDelete = (bookingId) => ({
   type: BOOK_DELETE,
   bookingId: bookingId,
 })
+
 
 // Thunks
 
@@ -63,6 +65,9 @@ export const getOneBooking = (id) => async (dispatch) => {
     dispatch(load(booking, id));
   }
 };
+
+
+// Action Reducer
 
 const initialState = {};
 

@@ -117,6 +117,9 @@ const BookingPage = () => {
           <h1>
             {spot.name}
           </h1>
+          {/* <div>
+            Rating
+          </div> */}
         </div>
         <div id="booking-container">
           <div id="booking-images">
