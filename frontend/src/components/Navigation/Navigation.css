@@ -1,6 +1,7 @@
 #nav-bar {
   position: sticky;
   top: 0px;
+  height: 70px;
   padding: 5px;
   background: #FFFFFF;
   box-shadow: 0 0px 5px 0px rgba(50, 50, 50, 0.25);
