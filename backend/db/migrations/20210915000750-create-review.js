@@ -21,7 +21,7 @@ module.exports = {
       review: {
         allowNull: false,
         type: Sequelize.TEXT
-      },
+      },// Add Stars later
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

@@ -31,6 +31,8 @@ const Reviews = () => {
     dispatch(getAllUsers())
   },[dispatch]);
 
+
+  // REVIEW SUBMIT Button Handler
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -47,17 +49,18 @@ const Reviews = () => {
       setErrors([]);
       const textBox = document.getElementsByClassName('pseudo-text-box')[0];
       textBox.innerText = "";
-      return dispatch(addReview( payload, id ))
+      dispatch(addReview( payload, id ))
         .catch(async (res) => {
           const data = await res.json();
           if (data && data.errors) setErrors(data.errors);
         });
+      return dispatch(getAllReviewsId(id));
     }
   }
 
+  // DELETE Button Handler
   const handleDelete = (e, reviewDeleteId) => {
     e.preventDefault();
-    console.log("DELETE BUTTON", reviewDeleteId)
     dispatch(deleteReview(reviewDeleteId))
       .catch(async (res) => {
         const data = await res.json();
@@ -68,6 +71,8 @@ const Reviews = () => {
       dispatch(getAllReviewsId(id))  // This is way hacky, but for some reason using only one works only after a page reload
     )
   }
+
+  // EDIT Mode Button Handler
   const handleEdit = (e, reviewEditId) => {
     e.preventDefault();
     setEditComment(reviewEditId + "-true");
@@ -76,6 +81,8 @@ const Reviews = () => {
     reviewEditText.setAttribute("contentEditable", true);
     reviewEditText.focus();
   }
+
+  // EDIT SUBMIT Button Handler
   const handleEditSubmit = (e, reviewEditId) => {
     e.preventDefault();
     const reviewEditText = document.getElementsByClassName(`review-text-id-${reviewEditId}`)[0];
@@ -102,6 +109,8 @@ const Reviews = () => {
     }
     setEditComment("false");
   }
+
+  // EDIT CANCEL Button Handler
   const handleEditCancel = (e, reviewEditId) => {
     e.preventDefault();
     setEditComment("false");
@@ -110,6 +119,8 @@ const Reviews = () => {
     reviewEditText.innerText = reviewParts[reviewEditId].review;
   }
 
+
+  // MAIN RENDER
   if( sessionUser !== undefined ){
     return(
       <>

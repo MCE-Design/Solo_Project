@@ -125,7 +125,10 @@ router.get(
     const allReviews = await Review.findAll({
       where: {
         spotId
-      }
+      },
+      order: [
+        ['createdAt', 'DESC']
+    ],
     })
     console.log(allReviews)
     return res.json({
