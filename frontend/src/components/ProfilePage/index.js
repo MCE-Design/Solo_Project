@@ -58,7 +58,7 @@ const ProfilePage = () => {
                         {/* {booking.endDate} */}
                       </div>
                       <div className="booking-tools">
-                        <button onClick={(e) => bookingDelete(e, booking.id)}>Cancel Reservation</button>
+                        <button onClick={(e) => bookingDelete(e, booking.id)} className="booking-cancel-button">Cancel Reservation</button>
                       </div>
                     </div>
                   </div>

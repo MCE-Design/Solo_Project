@@ -10,16 +10,29 @@ html {
 }
 
 #login-box form {
+  display: flex;
+  align-items:initial;
   max-width: 500px;
   padding: 20px;
   border: 1px solid #CCCCCC;
   background: #FFFFFF;
 }
 
+#login-box form .input-holder {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 #login-box form .input-holder > label {
   margin-right: 20px;
+  margin-bottom: 5px;
 }
 
 #login-box form input {
+  padding: 10px;
+  border: 1px solid #CCCCCC;
+  border-radius: 5px;
+  margin-bottom: 15px;
   margin-bottom: 15px;
 }

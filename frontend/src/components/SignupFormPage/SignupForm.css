@@ -9,14 +9,30 @@ html {
   align-items: center;
 }
 
+#signup-box {
+  margin-top: 30px;
+}
+
+
 #signup-box form {
+  display: flex;
+  align-items: initial;
   max-width: 500px;
   padding: 20px;
   border: 1px solid #CCCCCC;
   border-radius: 10px;
   background: #FFFFFF;
 }
-
+#signup-box form label {
+  margin-bottom: 5px;
+}
 #signup-box form input {
+  padding: 10px;
+  border: 1px solid #CCCCCC;
+  border-radius: 5px;
   margin-bottom: 15px;
+}
+
+#signup-box button {
+  width: 100%;
 }

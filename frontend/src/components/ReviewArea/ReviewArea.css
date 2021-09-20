@@ -68,5 +68,15 @@
 
 .review-edit,
 .review-delete {
+  background: #CCCCCC;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  color: #333333;
+  cursor: pointer;
+}
 
+.review-edit:hover,
+.review-delete:hover {
+  background: #999999;
 }

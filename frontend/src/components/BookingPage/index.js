@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, Redirect } from "react-router-dom";
+import { useParams, Redirect, useHistory } from "react-router-dom";
 import { getOneSpot } from "../../store/spots"
 import SpotImage from "../SpotImage";
 import { bookSpot, deleteBooking, getAllBookingsId } from "../../store/booking"
@@ -15,6 +15,7 @@ import './BookingPage.css'
 const BookingPage = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
+  const history = useHistory();
   const spotId = parseInt( id );
 
   const sessionUser = useSelector(state => state.session.user);
@@ -63,7 +64,9 @@ const BookingPage = () => {
     if (sessionUser === undefined){
       setShowModal(true);
     } else {
-      dispatch(setShowModal(false));
+      if( showModal === true ){
+        dispatch(setShowModal(false));
+      }
       payload = {
         spotId,
         userId: sessionUser.id,
@@ -86,11 +89,14 @@ const BookingPage = () => {
     if (date1.getTime() > currentTime && date1.getTime() < date2.getTime()) {
       console.log("payload", payload);
       setErrors([]);
-      return dispatch(bookSpot( payload, id ))
+      dispatch(bookSpot( payload, id ))
         .catch(async (res) => {
           const data = await res.json();
           if (data && data.errors) setErrors(data.errors);
         });
+      return(
+        history.push("/profile")
+      )
     }
   };
 

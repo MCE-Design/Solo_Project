@@ -23,7 +23,7 @@ const LoginForm = () => {
 
   return (
     <div id="login-box">
-      <button></button>
+      {/* <button></button> */}
       <form onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, idx) => (
@@ -52,7 +52,7 @@ const LoginForm = () => {
             required
           />
         </div>
-        <button type="submit">Log In</button>
+        <button type="submit" className="small-button">Log In</button>
       </form>
     </div>
   );
