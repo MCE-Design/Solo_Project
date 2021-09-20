@@ -19,6 +19,10 @@ module.exports = {
         spotId: 2,
         url:'http://www.thedart.co/wp-content/uploads/2021/07/barad-dur.jpeg'
       },
+      {
+        spotId: 3,
+        url:'https://i2.wp.com/thefairytaletraveler.com/wp-content/uploads/2015/05/LORD-OF-THE-RINGS-Middle-Earth-on-Earth.jpg'
+      },
     ], {});
   },
 

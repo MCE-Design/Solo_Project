@@ -25,6 +25,17 @@ module.exports = {
         name: 'Barad-dûr',
         price: '1000000.00'
       },
+      {
+        userId: 8,
+        address: '5372 Watterworks Road',
+        city: 'Upper Hutt',
+        state: 'Wellington',
+        country: 'New Zealand',
+        lat: '-41.0659951',
+        lng: '175.199909',
+        name: 'Rivendell',
+        price: '10000.00'
+      }
     ], {});
   },
 

@@ -67,7 +67,6 @@ router.post(
   requireAuth,
   asyncHandler(async (req, res) => {
     const { spotId, userId, startDate, endDate } = req.body;
-    console.log(req.body)
     const booking = await Booking.create({ spotId, userId, startDate, endDate });
     return res.json({
       booking,
@@ -85,7 +84,6 @@ router.get(
         spotId
       }
     })
-    console.log(allBookings)
     return res.json({
       allBookings,
     })
@@ -100,8 +98,6 @@ router.delete(
   requireAuth,
   asyncHandler(async (req, res) => {
     const bookingId = req.params.id;
-    console.log("HIT", req.params.id)
-    console.log("BookingId", bookingId)
     const foundBooking = await Booking.findByPk(bookingId);
     if (!foundBooking) throw new Error('Cannot find booking');
     const destroyedBooking = await Booking.destroy({
@@ -109,7 +105,6 @@ router.delete(
         id: bookingId
       }
     });
-    console.log("DESTROYED", bookingId)
     return res.json({
       destroyedBooking
     });
@@ -130,7 +125,6 @@ router.get(
         ['createdAt', 'DESC']
     ],
     })
-    console.log(allReviews)
     return res.json({
       allReviews,
     })
@@ -145,7 +139,6 @@ router.post(
   // requireAuth,
   asyncHandler(async (req, res) => {
     const { userId, spotId, review } = req.body;
-    console.log(req.body);
     const newReview = await Review.create({ userId, spotId, review });
     return res.json({
       newReview,
@@ -162,7 +155,6 @@ router.put(
   asyncHandler(async (req, res) => {
     const { userId, spotId, review } = req.body;
     const id = req.params.id;
-    console.log(req.body);
     const editedReview = await Review.update(
       {
        userId,
@@ -175,7 +167,6 @@ router.put(
         plain: true,
       }
     );
-    console.log("editedReview", editedReview);
     return res.json({
       editedReview,
     })
@@ -190,8 +181,6 @@ router.delete(
   // requireAuth,
   asyncHandler(async (req, res) => {
     const reviewId = req.params.id;
-    console.log("HIT", req.params.id)
-    console.log("reviewId", reviewId)
     const foundReview = await Review.findByPk(reviewId);
     if (!foundReview) throw new Error('Cannot find review');
     const destroyedReview = await Review.destroy({
@@ -199,7 +188,6 @@ router.delete(
         id: reviewId
       }
     });
-    console.log("DESTROYED", reviewId)
     return res.json({
       destroyedReview
     });
