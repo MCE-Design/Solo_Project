@@ -7,6 +7,8 @@ import Navigation from "./components/Navigation";
 import LandingPage from "./components/LandingPage";
 import SpotsPage from "./components/SpotsPage";
 import BookingPage from "./components/BookingPage";
+import ProfilePage from "./components/ProfilePage";
+import FourOhFourPage from "./components/FourOhFourPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -31,6 +33,12 @@ function App() {
           </Route>
           <Route path="/spots/:id">
             <BookingPage />
+          </Route>
+          <Route path="/profile">
+            <ProfilePage />
+          </Route>
+          <Route path="*">
+            <FourOhFourPage />
           </Route>
         </Switch>
       )}

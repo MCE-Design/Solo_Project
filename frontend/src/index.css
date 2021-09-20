@@ -1,6 +1,6 @@
 /* TODO Add site wide styles */
 html {
-  background: #EEEEEE;
+  background: #FFFFFF;
   margin: 0;
 }
 
@@ -14,5 +14,9 @@ body {
 }
 
 .container {
-  margin: 30px 20px;
+  margin: 30px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1024px;
 }

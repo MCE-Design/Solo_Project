@@ -1,5 +1,5 @@
 html {
-  background: #EEEEEE;
+
 }
 
 #login-box,
@@ -14,6 +14,10 @@ html {
   padding: 20px;
   border: 1px solid #CCCCCC;
   background: #FFFFFF;
+}
+
+#login-box form .input-holder > label {
+  margin-right: 20px;
 }
 
 #login-box form input {

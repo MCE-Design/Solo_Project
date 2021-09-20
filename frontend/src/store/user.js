@@ -1,4 +1,4 @@
-const LOAD_USER = "user/loadUser"
+const LOAD_USER = "user/loadUser";
 
 const load = list => ({
   type: LOAD_USER,

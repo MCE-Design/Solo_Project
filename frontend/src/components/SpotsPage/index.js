@@ -52,7 +52,8 @@ const SpotsPage = () => {
                         </div>
                       </div>
                       <div className="spot-price">
-                        {spot.price}
+                        <div>Price per night</div>
+                        💰{spot.price}
                       </div>
                     </div>
                   </a>

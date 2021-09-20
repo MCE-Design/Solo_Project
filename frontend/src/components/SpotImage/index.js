@@ -25,6 +25,8 @@ const SpotImage = ({spotId}) => {
           </div>
         )
       })}
+      {/* <a className="prev" onclick="plusSlides(-1)">&#10094;</a>
+      <a className="next" onclick="plusSlides(1)">&#10095;</a> */}
     </div>
   );
 }

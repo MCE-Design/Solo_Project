@@ -1,4 +1,3 @@
-import { get } from "js-cookie";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
@@ -154,7 +153,7 @@ const Reviews = () => {
                 required
               >
               </div>
-              <button type="submit">Post Review</button>
+              <button type="submit" className="review-submit medium-button">Post Review</button>
               <ul>
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}
               </ul>

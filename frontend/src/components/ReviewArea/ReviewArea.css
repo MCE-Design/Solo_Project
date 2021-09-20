@@ -1,6 +1,6 @@
 
 #review-box .new-review {
-
+  margin-bottom: 40px;
 }
 
 #review-box .pseudo-text-box {
@@ -11,7 +11,7 @@
   border: 1px solid #CCCCCC;
   border-radius: 10px;
   background: #FFFFFF;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .review-wrapper {
@@ -44,6 +44,20 @@
   margin-bottom: 20px;
 }
 
+.review-submit {
+  padding: 15px;
+  border: none;
+  border-radius: 10px;
+  background: #F22B56;
+  color: #FFFFFF;
+  font-size: 1.2em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.review-submit:hover {
+  background: #F20B36;
+}
 .review-tools {
 
 }

@@ -63,6 +63,7 @@ const BookingPage = () => {
     if (sessionUser === undefined){
       setShowModal(true);
     } else {
+      dispatch(setShowModal(false));
       payload = {
         spotId,
         userId: sessionUser.id,
@@ -112,7 +113,7 @@ const BookingPage = () => {
           <LoginForm />
         </Modal>
       )}
-      <div className="container">
+      <div className="container booking-page">
         <div className="page-title">
           <h1>
             {spot.name}
@@ -127,29 +128,31 @@ const BookingPage = () => {
           </div>
           <div id="booking-owner">
             <h2>Dwelling hosted by {ownerName}</h2>
-            <button onClick={bookingDelete}>Delete Booking</button>
+            {/* <button onClick={bookingDelete}>Delete Booking</button> */}
           </div>
           <div id="booking-form">
             <form onSubmit={handleSubmit}>
-              <label>
-                Check-In
+              <div className="booking-form-top">
+                <label>
+                  Check-In
+                </label>
                 <input
                   type="date"
                   value={startDate}
                   onChange={(e) => setStartDate(e.target.value)}
                   required
                 />
-              </label>
-              <label>
-                Check-Out
+                <label>
+                  Check-Out
+                </label>
                 <input
                   type="date"
                   value={endDate}
                   onChange={(e) => setEndDate(e.target.value)}
                   required
                 />
-              </label>
-              <button type="submit">Book Lodging</button>
+              </div>
+              <button type="submit" className="booking-submit medium-button">Book Lodging</button>
               <ul>
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}
               </ul>

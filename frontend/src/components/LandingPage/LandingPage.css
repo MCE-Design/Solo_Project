@@ -27,9 +27,10 @@
 #where-to-button {
   display: inline-block;
   width: 300px;
-  padding: 10px;
-  border-radius: 20px;
+  padding: 20px 10px;
+  border-radius: 30px;
   font-size: 1.25em;
+  font-weight: bold;
   text-decoration: none;
   color: #DD6666;
   background: #FFFFFF;

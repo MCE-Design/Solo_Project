@@ -1,19 +1,63 @@
 #booking-container {
-  margin-top: 30px;
+
 }
 
+.booking-page .page-title {
+  align-self: flex-start;
+}
+.booking-page .page-title h1 {
+  font-weight: normal;
+}
 #booking-images,
 #booking-images .spot-image {
   display: flex;
 }
 
+#booking-images {
+  margin-bottom: 40px;
+}
+
+#booking-images .spot-image {
+
+}
+
 #booking-images .image-wrapper {
   max-width: 500px;
+  border-radius: 10px;
+  display: flex;
   overflow: hidden;
+  background: #000000;
+  transition: opacity 0.2s;
+}
+
+#booking-images .image-wrapper img:hover {
+  opacity: 80%;
 }
 
 #booking-images img {
-  max-height: 340px;
+  max-height: 500px;
+}
+
+#booking-images .image-wrapper:first-child {
+  margin-right: 10px;
+}
+
+#booking-images .image-wrapper:nth-child(2) {
+  max-height: 240px;
+  max-width: 240px;
+  overflow: hidden;
+  margin-right: 10px;
+}
+#booking-images .image-wrapper:nth-child(2) img {
+  max-height: 240px;
+}
+#booking-images .image-wrapper:nth-child(3) {
+  max-height: 240px;
+  max-width: 240px;
+  overflow: hidden;
+}
+#booking-images .image-wrapper:nth-child(3) img {
+  max-height: 240px;
 }
 
 #booking-owner {
@@ -26,4 +70,32 @@
   padding: 20px;
   box-shadow: 0 0 5px 0 rgba(30, 30, 30, 0.25);
   margin-bottom: 20px;
+}
+
+.booking-form-top {
+  margin-bottom: 20px;
+}
+
+#booking-form label {
+  margin-right: 10px;
+}
+
+#booking-form input {
+  margin-right: 15px;
+}
+
+.booking-submit {
+  padding: 15px;
+  border: none;
+  border-radius: 10px;
+  background: #F22B56;
+  color: #FFFFFF;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.booking-submit:hover {
+  background: #F20B36;
 }

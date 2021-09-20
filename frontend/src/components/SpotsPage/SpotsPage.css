@@ -13,9 +13,10 @@
   padding: 25px;
   border: 1px solid #CCCCCC;
   border-width: 0 0 1px;
-  margin-bottom: 25px;
 }
-
+.spot-name {
+  font-weight: bold;
+}
 .spot-image {
   margin-right: 20px;
 }
@@ -41,3 +42,56 @@
 .spot-price {
 
 }
+
+
+.spot-image .image-wrapper { /* Temp to hide extra images */
+  display: none;
+}
+
+.spot-image .image-wrapper:first-child {
+  display: inherit;
+}
+/* .spot-image .image-wrapper {
+  display: none;
+}
+
+.spot-image .prev, .spot-image .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+.spot-image .next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.spot-image .prev:hover, .spot-image .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+.spot-image .image-wrapper .fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+} */

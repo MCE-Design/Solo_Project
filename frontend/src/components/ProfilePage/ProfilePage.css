@@ -1,0 +1,28 @@
+#bookings-container {
+  display: flex;
+}
+
+.booking-wrapper {
+  display: flex;
+  flex-direction: column;
+  /* max-width: 300px; */
+  /* max-height: 200px; */
+  width: 300px;
+  height: 200px;
+  /* overflow: hidden; */
+}
+
+.booking-wrapper .spot-image .image-wrapper img {
+  width: 200px;
+  height: 200px;
+  display: none;
+}
+
+.booking-wrapper .spot-image .image-wrapper:first-of-type img {
+  display: flex;
+}
+
+.booking-dates {
+  display: flex;
+  flex-direction: row;
+}
