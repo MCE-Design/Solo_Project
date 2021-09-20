@@ -38,3 +38,15 @@ button {
 .small-button:hover {
   background: #F20B36;
 }
+.small-button-plain {
+  background: #CCCCCC;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  color: #333333;
+  cursor: pointer;
+}
+
+.small-button-plain:hover {
+  background: #999999;
+}

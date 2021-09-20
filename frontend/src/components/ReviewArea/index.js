@@ -172,19 +172,19 @@ const Reviews = () => {
                         <div className="review-tools">
                           { editComment === `${review.id}-true`?(
                             <>
-                              <button onClick={(e) => handleEditCancel(e, review.id)} className="review-edit-cancel small-button">
+                              <button onClick={(e) => handleEditCancel(e, review.id)} className="review-edit-cancel small-button-plain">
                                 Cancel
                               </button>
-                              <button onClick={(e) => handleEditSubmit(e, review.id)} className="review-edit-submit small-button">
+                              <button onClick={(e) => handleEditSubmit(e, review.id)} className="review-edit-submit small-button-plain">
                                 Submit
                               </button>
                             </>
                           ):(
                             <>
-                              <button onClick={(e) => handleEdit(e, review.id)} className="review-edit small-button">
+                              <button onClick={(e) => handleEdit(e, review.id)} className="review-edit small-button-plain">
                                 Edit
                               </button>
-                              <button onClick={(e) => handleDelete(e, review.id)} className="review-delete small-button">
+                              <button onClick={(e) => handleDelete(e, review.id)} className="review-delete small-button-plain">
                                 Delete
                               </button>
                             </>
