@@ -40,7 +40,7 @@ const BookingPage = () => {
 
   useEffect(() => {
     dispatch(getUser(ownerId));
-  },[dispatch, ownerId])
+  },[dispatch, ownerId]);
   console.log("owner", owner, ownerName)
 
   if(owner[ownerId]){
@@ -50,7 +50,7 @@ const BookingPage = () => {
 
   useEffect(() => {
     dispatch(getAllBookingsId(spotId));
-  },[dispatch, spotId])
+  },[dispatch, spotId]);
 
   console.log("errors", errors)
   const handleSubmit = (e) => {
@@ -95,7 +95,7 @@ const BookingPage = () => {
 
   const bookingDelete = (e) => {
     e.preventDefault();
-    return dispatch(deleteBooking(12))
+    return dispatch(deleteBooking(13))
       .catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) setErrors(data.errors);

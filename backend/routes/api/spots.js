@@ -5,6 +5,7 @@ const { requireAuth } = require('../../utils/auth');
 const { Spot } = require("../../db/models");
 const { Image } = require("../../db/models");
 const { Booking } = require("../../db/models");
+const { Review } = require("../../db/models");
 
 // Add back for validations if I get to create/delete/edit spots
 // const { User } = require('../../db/models');
@@ -78,7 +79,7 @@ router.post(
 router.get(
   '/:id/booking',
   asyncHandler(async (req, res) => {
-    const spotId = req.params.id
+    const spotId = req.params.id;
     const allBookings = await Booking.findAll({
       where: {
         spotId
@@ -96,8 +97,9 @@ router.get(
 router.delete(
   '/booking/:id',
   // validateBookingDelete,
+  requireAuth,
   asyncHandler(async (req, res) => {
-    const bookingId = req.params.id
+    const bookingId = req.params.id;
     console.log("HIT", req.params.id)
     console.log("BookingId", bookingId)
     const foundBooking = await Booking.findByPk(bookingId);
@@ -110,6 +112,80 @@ router.delete(
     console.log("DESTROYED", bookingId)
     return res.json({
       destroyedBooking
+    });
+  })
+)
+
+
+/* GET ALL Reviews for a SPOT*/
+router.get(
+  '/:id/reviews',
+  asyncHandler(async (req, res) => {
+    const spotId = req.params.id;
+    const allReviews = await Review.findAll({
+      where: {
+        spotId
+      }
+    })
+    console.log(allReviews)
+    return res.json({
+      allReviews,
+    })
+  })
+)
+
+
+/* ADD Review */
+router.post(
+  '/:id/reviews',
+  // validateReview,
+  // requireAuth,
+  asyncHandler(async (req, res) => {
+    const { userId, spotId, review } = req.body;
+    console.log(req.body);
+    const newReview = await Review.create({ userId, spotId, review });
+    return res.json({
+      newReview,
+    })
+  })
+)
+
+
+/* EDIT Review */
+router.put(
+  'reviews/:id',
+  // validateReview,
+  // requireAuth,
+  asyncHandler(async (req, res) => {
+    const { userId, spotId, review } = req.body;
+    console.log(req.body);
+    const editedReview = await Review.update({ userId, spotId, review});
+    return res.json({
+      editedReview,
+    })
+  })
+)
+
+
+/* DELETE Review */
+router.delete(
+  '/reviews/:id',
+  // validateReviewDelete,
+  // requireAuth,
+  asyncHandler(async (req, res) => {
+    const reviewId = req.params.id;
+    console.log("HIT", req.params.id)
+    console.log("reviewId", reviewId)
+    const foundReview = await Review.findByPk(reviewId);
+    if (!foundReview) throw new Error('Cannot find review');
+    const destroyedReview = await Review.destroy({
+      where: {
+        id: reviewId
+      }
+    });
+    console.log("DESTROYED", reviewId)
+    return res.json({
+      destroyedReview
     });
   })
 )

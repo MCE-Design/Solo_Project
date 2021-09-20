@@ -40,7 +40,7 @@ export const getAllReviewsId = (id) => async dispatch => {
 }
 
 export const addReview = (payload, id) => async dispatch => {
-  const response = await csrfFetch(`api/spots/${id}/reviews`, {
+  const response = await csrfFetch(`/api/spots/${id}/reviews`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
@@ -53,7 +53,7 @@ export const addReview = (payload, id) => async dispatch => {
 }
 
 export const editReview = (payload, id) => async dispatch => {
-  const response = await csrfFetch(`api/spots/reviews/${id}`, {
+  const response = await csrfFetch(`/api/spots/reviews/${id}`, {
     method: `PUT`,
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
@@ -84,12 +84,13 @@ const reviewsReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD: {
       const allReviews = {};
-      action.list.forEach(review => {
+      action.list.allReviews.forEach(review => {
         allReviews[review.id] = review;
       });
       return {
         ...allReviews,
-        ...state
+        ...state,
+        list: action.list.allReviews
       };
     }
     case ADD:

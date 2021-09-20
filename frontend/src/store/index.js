@@ -4,6 +4,7 @@ import sessionReducer from './session';
 import spotsReducer from './spots';
 import imagesReducer from './spotImages';
 import bookingReducer from './booking';
+import reviewsReducer from './reviews';
 import userReducer from './user';
 
 const rootReducer = combineReducers({
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   spots: spotsReducer,
   images: imagesReducer,
   booking: bookingReducer,
+  review: reviewsReducer,
   user: userReducer
 });
 

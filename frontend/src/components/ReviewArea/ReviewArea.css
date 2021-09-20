@@ -13,3 +13,46 @@
   background: #FFFFFF;
   margin-bottom: 10px;
 }
+
+.review-wrapper {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  max-width: 630px;
+}
+
+.review-head {
+  margin-bottom: 15px;
+}
+
+.review-user {
+  font-weight: bold;
+}
+
+.review-subhead {
+  display: flex;
+}
+
+.review-date {
+  display: flex;
+  margin-right: 20px;
+  color: #999999;
+}
+
+.review-body {
+  min-height: 100px;
+  margin-bottom: 20px;
+}
+
+.review-tools {
+
+}
+
+.review-tools button:first-child {
+  margin-right: 10px;
+}
+
+.review-edit,
+.review-delete {
+
+}

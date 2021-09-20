@@ -13,6 +13,14 @@ export const getUser = (id) => async dispatch => {
   }
 };
 
+export const getAllUsers = () => async dispatch => {
+  const response = await fetch(`/api/users/`);
+  if (response.ok) {
+    const list = await response.json();
+    dispatch(load(list));
+  }
+};
+
 const initialState = {};
 
 const userReducer = (state = initialState, action) => {

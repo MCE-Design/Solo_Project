@@ -46,6 +46,15 @@ router.post(
   }),
 );
 
+router.get('/', asyncHandler(async (req, res) => {
+  const id = req.params.id
+  const user = await User.findAll({
+
+  });
+
+  return res.json(user)
+}));
+
 router.get('/:id', asyncHandler(async (req, res) => {
   const id = req.params.id
   const user = await User.findAll({
