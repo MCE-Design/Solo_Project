@@ -37,8 +37,6 @@ const ProfilePage = () => {
     return dispatch(getUserBookings(currentUserId));
   };
 
-  console.log(spots)
-  console.log("Bookings", bookings)
   if( sessionUser ){
     return (
       <>

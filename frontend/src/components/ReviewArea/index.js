@@ -44,7 +44,6 @@ const Reviews = () => {
       return setErrors(['You must enter a review before submitting it.']);
     }
     if(newReviewText) {
-      console.log("Submitting Payload", payload);
       setErrors([]);
       const textBox = document.getElementsByClassName('pseudo-text-box')[0];
       textBox.innerText = "";
@@ -96,12 +95,10 @@ const Reviews = () => {
     }
     reviewEditText.setAttribute("contentEditable", false);
     if(newText !== '' && newText !== reviewParts[reviewEditId].review) {
-      console.log("Submitting Payload", payload);
       setErrors([]); // Change this
       setEditComment("false");
       return dispatch(editReview( payload, reviewEditId ))
         .catch(async (res) => {
-          console.log("RES", res)
           const data = await res.json();
           if (data && data.errors) setErrors(data.errors);
         });

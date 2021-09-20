@@ -41,7 +41,6 @@ export const deleteBooking = (id) => async (dispatch) => {
 }
 
 export const bookSpot = (payload, id) => async (dispatch) => {
-  console.log("reducerData", payload)
   const response = await csrfFetch(`/api/spots/${id}/booking`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

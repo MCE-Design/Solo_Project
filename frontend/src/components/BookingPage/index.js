@@ -42,18 +42,15 @@ const BookingPage = () => {
   useEffect(() => {
     dispatch(getUser(ownerId));
   },[dispatch, ownerId]);
-  console.log("owner", owner, ownerName)
 
   if(owner[ownerId]){
     ownerName = owner[ownerId].userName;
   }
-  console.log("owner", owner, ownerName)
 
   useEffect(() => {
     dispatch(getAllBookingsId(spotId));
   },[dispatch, spotId]);
 
-  console.log("errors", errors)
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -74,11 +71,6 @@ const BookingPage = () => {
         endDate,
       };
     }
-    console.log("begin", startDate)
-    console.log(startDate <= endDate)
-    console.log("Begin same as Stop?", date1.getTime() === date2.getTime())
-    console.log("Begin more than Stop?", date1.getTime() > date2.getTime())
-    console.log("new date", new Date())
 
     if(startDate && date1.getTime() < currentTime ){
       return setErrors(['Please make sure that the start date is in the future']);
@@ -87,7 +79,6 @@ const BookingPage = () => {
       return setErrors(['Please make sure that the end date is after the start date.']);
     }
     if (date1.getTime() > currentTime && date1.getTime() < date2.getTime()) {
-      console.log("payload", payload);
       setErrors([]);
       dispatch(bookSpot( payload, id ))
         .catch(async (res) => {
