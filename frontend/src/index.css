@@ -21,6 +21,9 @@ body {
   max-width: 1024px;
 }
 
+button {
+  cursor: pointer;
+}
 .small-button {
   padding: 10px 15px;
   border: none;
