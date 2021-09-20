@@ -153,13 +153,26 @@ router.post(
 
 /* EDIT Review */
 router.put(
-  'reviews/:id',
+  '/reviews/:id',
   // validateReview,
-  // requireAuth,
+  requireAuth,
   asyncHandler(async (req, res) => {
     const { userId, spotId, review } = req.body;
+    const id = req.params.id;
     console.log(req.body);
-    const editedReview = await Review.update({ userId, spotId, review});
+    const editedReview = await Review.update(
+      {
+       userId,
+       spotId,
+       review
+      },
+      {
+        where: { id },
+        returning: true,
+        plain: true,
+      }
+    );
+    console.log("editedReview", editedReview);
     return res.json({
       editedReview,
     })

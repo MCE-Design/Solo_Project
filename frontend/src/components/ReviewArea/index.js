@@ -35,8 +35,8 @@ const Reviews = () => {
     e.preventDefault();
 
     const payload = {
-      spotId,
       userId: sessionUser.id,
+      spotId,
       review: newReviewText,
     };
     if(!newReviewText){
@@ -70,8 +70,6 @@ const Reviews = () => {
   }
   const handleEdit = (e, reviewEditId) => {
     e.preventDefault();
-    console.log("EDIT BUTTON", reviewEditId)
-    const reviewEditWrapper = document.getElementsByClassName(`review-id-${reviewEditId}`)[0];
     setEditComment(reviewEditId + "-true");
 
     const reviewEditText = document.getElementsByClassName(`review-text-id-${reviewEditId}`)[0];
@@ -80,7 +78,29 @@ const Reviews = () => {
   }
   const handleEditSubmit = (e, reviewEditId) => {
     e.preventDefault();
-    // const newText = reviewEditObject.innerText;
+    const reviewEditText = document.getElementsByClassName(`review-text-id-${reviewEditId}`)[0];
+    const newText = reviewEditText.innerText;
+    const payload = {
+      userId: sessionUser.id,
+      spotId,
+      review: newText,
+    };
+    if(newText === ''){// Make setter and element for each div.
+      return setErrors(['You must enter a review before submitting it.']);
+    }
+    reviewEditText.setAttribute("contentEditable", false);
+    if(newText !== '' && newText !== reviewParts[reviewEditId].review) {
+      console.log("Submitting Payload", payload);
+      setErrors([]); // Change this
+      setEditComment("false");
+      return dispatch(editReview( payload, reviewEditId ))
+        .catch(async (res) => {
+          console.log("RES", res)
+          const data = await res.json();
+          if (data && data.errors) setErrors(data.errors);
+        });
+    }
+    setEditComment("false");
   }
   const handleEditCancel = (e, reviewEditId) => {
     e.preventDefault();

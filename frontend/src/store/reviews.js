@@ -60,7 +60,7 @@ export const editReview = (payload, id) => async dispatch => {
   });
   if (response.ok){
     const editedReview = await response.json();
-    dispatch(edit());
+    dispatch(edit(payload));
     return editedReview;
   }
 }
