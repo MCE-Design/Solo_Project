@@ -14,6 +14,9 @@
   border: 1px solid #CCCCCC;
   border-width: 0 0 1px;
 }
+.spot:last-child {
+  border: none;
+}
 .spot-name {
   font-weight: bold;
 }
